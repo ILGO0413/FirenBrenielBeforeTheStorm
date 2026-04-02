@@ -1,0 +1,53 @@
+<section class="reader">
+
+  <div class="reader-scroll" #readerScroll>
+    <div class="page-canvas">
+      <svg
+        [attr.viewBox]="'0 0 700 1050'"
+        xmlns="http://www.w3.org/2000/svg"
+        #pageSvg>
+      </svg>
+    </div>
+  </div>
+
+  <nav class="reader-nav">
+
+    <button
+      class="nav-arrow"
+      [disabled]="currentPage === 0"
+      (click)="goFirst()">
+      <svg viewBox="0 0 16 16"><path d="M2 8L2 2h2v4.5l8-4.5v12L4 9.5V14H2V8z"/></svg>
+      First
+    </button>
+
+    <button
+      class="nav-arrow"
+      [disabled]="currentPage === 0"
+      (click)="goPrev()">
+      <svg viewBox="0 0 16 16"><path d="M10 2L4 8l6 6V2z"/></svg>
+      Prev
+    </button>
+
+    <span class="page-indicator">
+      Page {{ currentPage + 1 }} / {{ totalPages }}
+    </span>
+
+    <button
+      class="nav-arrow"
+      [disabled]="currentPage === totalPages - 1"
+      (click)="goNext()">
+      Next
+      <svg viewBox="0 0 16 16"><path d="M6 2l6 6-6 6V2z"/></svg>
+    </button>
+
+    <button
+      class="nav-arrow"
+      [disabled]="currentPage === totalPages - 1"
+      (click)="goLast()">
+      Last
+      <svg viewBox="0 0 16 16"><path d="M14 8v6h-2V9.5L4 14V2l8 4.5V2h2v6z"/></svg>
+    </button>
+
+  </nav>
+
+</section>

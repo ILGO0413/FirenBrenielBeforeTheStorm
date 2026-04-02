@@ -1,0 +1,33 @@
+<header class="header">
+  <div class="header-inner">
+    <div class="brand" (click)="navigateTo('home')">
+      BEFORE<span>·</span>THE<span>·</span>STORM
+    </div>
+    <nav>
+      <button
+        class="nav-btn"
+        [class.active]="activeRoute === 'home'"
+        (click)="navigateTo('home')">
+        Home
+      </button>
+      <button
+        class="nav-btn"
+        [class.active]="activeRoute === 'reader'"
+        (click)="navigateTo('reader')">
+        Read
+      </button>
+      <button
+        class="nav-btn"
+        [class.active]="activeRoute === 'about'"
+        (click)="navigateTo('about')">
+        About the Comic
+      </button>
+      <button
+        class="nav-btn"
+        [class.active]="activeRoute === 'author'"
+        (click)="navigateTo('author')">
+        The Author
+      </button>
+    </nav>
+  </div>
+</header>
