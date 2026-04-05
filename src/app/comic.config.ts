@@ -1,3 +1,3 @@
 export const COMIC_CONFIG = {
-  totalPages: 4,
+  totalPages: 5,
 };
