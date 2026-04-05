@@ -25,11 +25,29 @@ export class ReaderComponent implements OnInit, OnDestroy {
   currentPage = signal(0);
   currentPageUrl = computed(() => this.pages[this.currentPage()]);
 
+  private preloadCache = new Set<string>();
+
+  private preloadAdjacent(): void {
+    const p = this.currentPage();
+    this.preload(p - 1);
+    this.preload(p + 1);
+  }
+
+  private preload(index: number): void {
+    if (index < 0 || index >= this.totalPages) return;
+    const url = this.pages[index];
+    if (this.preloadCache.has(url)) return;
+    this.preloadCache.add(url);
+    const img = new Image();
+    img.src = url;
+  }
+
   private keyboardSub!: Subscription;
 
   ngOnInit(): void {
     this.keyboardSub = fromEvent<KeyboardEvent>(document, 'keydown')
       .subscribe(e => this.onKeydown(e));
+    this.preloadAdjacent();
   }
 
   ngOnDestroy(): void {
@@ -39,12 +57,14 @@ export class ReaderComponent implements OnInit, OnDestroy {
   goFirst(): void {
     this.currentPage.set(0);
     this.scrollToTop();
+    this.preloadAdjacent();
   }
 
   goPrev(): void {
     if (this.currentPage() > 0) {
       this.currentPage.update(p => p - 1);
       this.scrollToTop();
+      this.preloadAdjacent();
     }
   }
 
@@ -52,12 +72,14 @@ export class ReaderComponent implements OnInit, OnDestroy {
     if (this.currentPage() < this.totalPages - 1) {
       this.currentPage.update(p => p + 1);
       this.scrollToTop();
+      this.preloadAdjacent();
     }
   }
 
   goLast(): void {
     this.currentPage.set(this.totalPages - 1);
     this.scrollToTop();
+    this.preloadAdjacent();
   }
 
   private scrollToTop(): void {
