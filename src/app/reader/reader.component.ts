@@ -1,29 +1,29 @@
-// reader.component.ts
-
 import {
   Component,
   OnInit,
   OnDestroy,
-  ViewChild,
-  ElementRef,
-  AfterViewInit
+  signal,
+  computed,
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
-import { PAGES, ComicPage } from './pages.data';
+import { COMIC_CONFIG } from '../comic.config';
+import { ReaderNavComponent } from './reader-nav/reader-nav.component';
 
 @Component({
   selector: 'app-reader',
   templateUrl: './reader.component.html',
   styleUrls: ['./reader.component.css'],
   standalone: true,
+  imports: [ReaderNavComponent],
 })
-export class ReaderComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ReaderComponent implements OnInit, OnDestroy {
 
-  @ViewChild('pageSvg') pageSvgRef!: ElementRef<SVGElement>;
-  @ViewChild('readerScroll') readerScrollRef!: ElementRef<HTMLDivElement>;
 
-  currentPage: number = 0;
-  totalPages: number = PAGES.length;
+  readonly totalPages = COMIC_CONFIG.totalPages;
+  readonly pages = Array.from({ length: this.totalPages }, (_, i) => `pages/1-${i + 1}.png`);
+
+  currentPage = signal(0);
+  currentPageUrl = computed(() => this.pages[this.currentPage()]);
 
   private keyboardSub!: Subscription;
 
@@ -32,48 +32,36 @@ export class ReaderComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(e => this.onKeydown(e));
   }
 
-  ngAfterViewInit(): void {
-    this.renderPage();
-  }
-
   ngOnDestroy(): void {
     this.keyboardSub?.unsubscribe();
   }
 
   goFirst(): void {
-    this.currentPage = 0;
-    this.renderPage();
+    this.currentPage.set(0);
+    this.scrollToTop();
   }
 
   goPrev(): void {
-    if (this.currentPage > 0) {
-      this.currentPage--;
-      this.renderPage();
+    if (this.currentPage() > 0) {
+      this.currentPage.update(p => p - 1);
+      this.scrollToTop();
     }
   }
 
   goNext(): void {
-    if (this.currentPage < this.totalPages - 1) {
-      this.currentPage++;
-      this.renderPage();
+    if (this.currentPage() < this.totalPages - 1) {
+      this.currentPage.update(p => p + 1);
+      this.scrollToTop();
     }
   }
 
   goLast(): void {
-    this.currentPage = this.totalPages - 1;
-    this.renderPage();
-  }
-
-  private renderPage(): void {
-    const svg = this.pageSvgRef.nativeElement;
-    const page: ComicPage = PAGES[this.currentPage];
-    page.render(svg);
+    this.currentPage.set(this.totalPages - 1);
     this.scrollToTop();
   }
 
   private scrollToTop(): void {
-    const scroll = this.readerScrollRef.nativeElement;
-    scroll.scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
   private onKeydown(e: KeyboardEvent): void {

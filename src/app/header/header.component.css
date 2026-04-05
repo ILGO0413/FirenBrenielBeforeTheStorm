@@ -5,8 +5,9 @@
   right: 0;
   height: var(--header-h);
   z-index: 100;
-  background: var(--ink);
-  border-bottom: 3px solid var(--accent);
+  background: var(--background-footer);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .header-inner {
@@ -18,10 +19,9 @@
 }
 
 .brand {
-  font-family: 'Bebas Neue', cursive;
+  font-family: 'Yeseva One', serif;
   font-size: 2rem;
-  color: var(--paper);
-  letter-spacing: 0.12em;
+  color: var(--text);
   cursor: pointer;
   display: flex;
   align-items: baseline;
@@ -39,12 +39,12 @@ nav {
 }
 
 .nav-btn {
-  font-family: 'Barlow Condensed', sans-serif;
+  font-family: 'Source Sans 3', sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--paper);
+  color: var(--text);
   background: none;
   border: none;
   padding: 6px 14px;

@@ -1,61 +1,27 @@
 <section class="home">
-  <div class="home-bg"></div>
+  <div class="home-inner">
 
-  <div class="home-content">
-
-    <div class="cover-art">
-      <div class="cover-frame" (click)="navigateTo('reader')">
-        <svg class="cover-svg" viewBox="0 0 360 540" xmlns="http://www.w3.org/2000/svg">
-          <rect width="360" height="540" fill="#0e0d0b"/>
-          <rect width="360" height="220" fill="#1a1220"/>
-          <circle cx="290" cy="70" r="38" fill="#f0a500" opacity="0.9"/>
-          <circle cx="305" cy="58" r="34" fill="#1a1220"/>
-          <rect x="0" y="180" width="40" height="180" fill="#0e0d0b"/>
-          <rect x="8" y="160" width="24" height="200" fill="#0e0d0b"/>
-          <rect x="45" y="200" width="30" height="160" fill="#111"/>
-          <rect x="52" y="185" width="16" height="175" fill="#0e0d0b"/>
-          <rect x="80" y="170" width="50" height="190" fill="#0e0d0b"/>
-          <rect x="90" y="155" width="30" height="205" fill="#111"/>
-          <rect x="140" y="190" width="35" height="170" fill="#0e0d0b"/>
-          <rect x="180" y="210" width="45" height="150" fill="#111"/>
-          <rect x="230" y="175" width="40" height="185" fill="#0e0d0b"/>
-          <rect x="240" y="160" width="20" height="200" fill="#111"/>
-          <rect x="275" y="200" width="55" height="160" fill="#0e0d0b"/>
-          <rect x="320" y="185" width="40" height="175" fill="#111"/>
-          <rect x="12" y="175" width="6" height="8" fill="#f0a500" opacity="0.7"/>
-          <rect x="22" y="175" width="6" height="8" fill="#f0a500" opacity="0.4"/>
-          <rect x="12" y="192" width="6" height="8" fill="#f0a500" opacity="0.6"/>
-          <rect x="55" y="200" width="5" height="7" fill="#c8372d" opacity="0.7"/>
-          <rect x="64" y="200" width="5" height="7" fill="#f0a500" opacity="0.5"/>
-          <rect x="94" y="168" width="7" height="9" fill="#f0a500" opacity="0.6"/>
-          <rect x="105" y="168" width="7" height="9" fill="#f0a500" opacity="0.3"/>
-          <rect x="94" y="185" width="7" height="9" fill="#f0a500" opacity="0.5"/>
-          <rect x="243" y="173" width="6" height="8" fill="#f0a500" opacity="0.7"/>
-          <rect x="254" y="173" width="6" height="8" fill="#c8372d" opacity="0.6"/>
-          <rect x="243" y="190" width="6" height="8" fill="#f0a500" opacity="0.4"/>
-          <rect x="0" y="340" width="360" height="200" fill="#111"/>
-          <rect x="0" y="340" width="360" height="4" fill="#c8372d" opacity="0.5"/>
-          <ellipse cx="180" cy="320" rx="18" ry="22" fill="#0e0d0b"/>
-          <rect x="172" y="298" width="16" height="30" fill="#0e0d0b"/>
-          <ellipse cx="180" cy="296" rx="12" ry="14" fill="#0e0d0b"/>
-          <path d="M162 310 Q165 340 168 360 L192 360 Q195 340 198 310 Z" fill="#1a1816"/>
-          <path d="M162 310 Q158 325 160 340 L168 340 Q170 320 172 310 Z" fill="#222"/>
-          <path d="M198 310 Q202 325 200 340 L192 340 Q190 320 188 310 Z" fill="#222"/>
-          <text x="180" y="480" font-family="'Bebas Neue', cursive" font-size="40" fill="#f5f0e8" text-anchor="middle" letter-spacing="6">PLACEHOLDER</text>
-          <text x="180" y="510" font-family="'Barlow Condensed', sans-serif" font-size="13" fill="#c8372d" text-anchor="middle" letter-spacing="4">for the cover</text>
-        </svg>
-      </div>
+    <div class="home-logo">
+      <img src="/logo.png" alt="Before the Storm" class="logo-img">
     </div>
 
-    <div class="home-info">
-      <h1 class="home-title">Before<br>the<br>Storm</h1>
-      <p class="home-synopsis">
-        Все они были мертвы. Последний выстрел поставил жирную точку в этой истории.
-        Я снял палец с курка — всё было кончено.
-      </p>
-      <div class="home-actions">
-        <button class="cta-btn" (click)="navigateTo('reader')">Read Now</button>
-        <button class="cta-secondary" (click)="navigateTo('about')">About this comic</button>
+    <div class="home-content">
+      <div class="cover-art">
+        <img src="/cover.png" alt="Cover Art" class="cover-frame"/>
+      </div>
+      <div class="home-info">
+        <p class="home-synopsis">
+          В глубинах Туманного леса сокрыто множество тайн. Но даже такой мрачный лес охраняется защитниками природы:
+          друидами и жрецами богини плодородия. Октавия - одна из них. Однако огонь, преследующий ее в кошмарах,
+          раз за разом напоминает эльфийке о потерянном доме. Узнать себя и тайны леса она сможет, только отправившись
+          в погоню за давно забытым прошлым.
+          <br>
+          <br>
+          Узнайте предысторию Октавии, которая родилась из любви к известной ролевой игре - Baldur's Gate 3.
+        </p>
+        <div class="home-actions">
+          <button class="cta-btn" (click)="navigateTo('reader')">ЧИТАТЬ</button>
+        </div>
       </div>
     </div>
 

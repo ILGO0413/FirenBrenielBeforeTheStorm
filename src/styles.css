@@ -1,12 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:ital,wght@0,300;0,400;1,300&display=swap');
 
 :root {
-  --ink: #0e0d0b;
-  --paper: #f5f0e8;
-  --panel-border: #1a1816;
-  --accent: #c8372d;
-  --accent2: #f0a500;
-  --muted: #7a7570;
+  --background: #232a32;
+  --background-footer: rgba(35, 42, 50, 0.65);
+  --text: #ffffff;
+  --text-footer: rgba(245, 240, 232, 0.35);
+  --accent: #56bc8a;
+  --accent2: #f5ad58;
+  --button: var(--accent);
+  --button-hover: var(--accent2);
+  --button-text: var(--text);
+  --button-hover-text: var(--background);
+  --button-disabled: #2d493f;
+  --button-disabled-text: var(--accent);
+
   --header-h: 64px;
   --footer-h: 72px;
 }
@@ -19,8 +26,8 @@
 
 body {
   font-family: 'Barlow', sans-serif;
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--background) url('/back.png') center center / cover no-repeat fixed;
+  color: var(--text);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -34,13 +41,15 @@ main {
 }
 
 .cta-btn {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 1.1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
   letter-spacing: 0.15em;
-  background: var(--accent);
-  color: white;
+  background: var(--button);
+  color: var(--button-text);
   border: none;
-  padding: 14px 36px;
+  padding: 20px 60px;
+  border-radius: 50px;
   cursor: pointer;
   transition: background 0.2s, transform 0.1s;
   display: inline-block;
@@ -48,25 +57,7 @@ main {
 }
 
 .cta-btn:hover {
-  background: #a82820;
+  background: var(--button-hover);
+  color: var(--button-hover-text);
   transform: translateY(-1px);
-}
-
-.cta-secondary {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-left: 1.5rem;
-  text-decoration: underline;
-  transition: color 0.2s;
-}
-
-.cta-secondary:hover {
-  color: var(--ink);
 }
