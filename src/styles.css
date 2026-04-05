@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:ital,wght@0,300;0,400;1,300&display=swap');
-
 :root {
   --background: #232a32;
   --background-footer: rgba(35, 42, 50, 0.65);
@@ -25,8 +23,8 @@
 }
 
 body {
-  font-family: 'Barlow', sans-serif;
-  background: var(--background) url('/back.png') center center / cover no-repeat fixed;
+  font-family: 'Source Sans 3', sans-serif;
+  background-color: var(--background);
   color: var(--text);
   min-height: 100vh;
   display: flex;
