@@ -27,6 +27,7 @@
 
 .logo-img {
   max-height: 240px;
+  max-width: 100%;
   width: auto;
   object-fit: contain;
 }
@@ -40,8 +41,14 @@
   width: 100%;
 }
 
+.cover-art {
+  padding: 0;
+  margin: 0;
+}
+
 .cover-frame {
-  max-width: 360px;
+  display: block;
+  width: 100%;
   position: relative;
   overflow: hidden;
 }
@@ -97,12 +104,20 @@
     gap: 2rem;
   }
 
+  .cover-art {
+    display: flex;
+    justify-content: center;
+  }
+
   .cover-frame {
-    max-width: 280px;
-    margin: 0 auto;
+    max-width: 100%;
   }
 
   .home-synopsis {
     max-width: 100%;
+  }
+
+  .logo-img {
+    max-height: 160px;
   }
 }

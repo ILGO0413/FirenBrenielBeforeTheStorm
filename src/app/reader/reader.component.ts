@@ -64,6 +64,16 @@ export class ReaderComponent implements OnInit, OnDestroy {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
+  onPageClick(e: MouseEvent): void {
+    const x = e.offsetX;
+    const width = (e.currentTarget as HTMLElement).offsetWidth;
+    if (x < width / 3) {
+      this.goPrev();
+    } else if (x > (width / 3) * 2) {
+      this.goNext();
+    }
+  }
+
   private onKeydown(e: KeyboardEvent): void {
     switch (e.key) {
       case 'ArrowRight':

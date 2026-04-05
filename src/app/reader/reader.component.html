@@ -10,7 +10,7 @@
   </app-reader-nav>
 
   <div class="reader-scroll">
-    <div class="page-canvas">
+    <div class="page-canvas" (click)="onPageClick($event)">
       <img [src]="currentPageUrl()" [alt]="'Page ' + (currentPage() + 1)" class="page-img">
     </div>
   </div>

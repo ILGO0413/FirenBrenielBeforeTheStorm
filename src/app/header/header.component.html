@@ -1,7 +1,10 @@
 <header class="header">
   <div class="header-inner">
-    <div class="brand" (click)="navigateTo('home')">
-      BEFORE<span>·</span>THE<span>·</span>STORM
+    <div class="brand-left" (click)="navigateTo('home')">
+      <img src="/icon.png" alt="Before the Storm" class="brand-icon">
+    </div>
+    <div class="brand-center" (click)="navigateTo('home')">
+      <span class="brand-text">BEFORE<span class="dot">·</span>THE<span class="dot">·</span>STORM</span>
     </div>
     <nav>
       <button
