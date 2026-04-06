@@ -1,0 +1,16 @@
+<section class="chapters">
+  <div class="chapters-inner">
+    <h1 class="chapters-title">Оглавление</h1>
+    <div class="chapters-grid">
+      @for (chapter of chapters; track $index) {
+        <div class="chapter-card">
+          <h3 class="chapter-title">{{ chapter.title }}</h3>
+          <img [src]="chapterCover($index)" [alt]="chapter.title" class="chapter-cover">
+          <button class="cta-btn" [disabled]="chapter.pages === 0" (click)="readChapter($index)">
+            {{ chapter.pages > 0 ? 'ЧИТАТЬ' : 'СКОРО' }}
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+</section>

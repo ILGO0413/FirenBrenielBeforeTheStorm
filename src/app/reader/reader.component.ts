@@ -5,6 +5,7 @@ import {
   signal,
   computed,
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { fromEvent, Subscription } from 'rxjs';
 import { COMIC_CONFIG } from '../comic.config';
 import { ReaderNavComponent } from './reader-nav/reader-nav.component';
@@ -18,36 +19,32 @@ import { ReaderNavComponent } from './reader-nav/reader-nav.component';
 })
 export class ReaderComponent implements OnInit, OnDestroy {
 
+  readonly chapters = COMIC_CONFIG.chapters;
 
-  readonly totalPages = COMIC_CONFIG.totalPages;
-  readonly pages = Array.from({ length: this.totalPages }, (_, i) => `pages/1-${i + 1}.png`);
-
+  currentChapter = signal(0);
   currentPage = signal(0);
-  currentPageUrl = computed(() => this.pages[this.currentPage()]);
+
+  totalPages = computed(() => this.chapters[this.currentChapter()].pages);
+  currentPageUrl = computed(() =>
+    `pages/${this.currentChapter() + 1}-${this.currentPage() + 1}.png`
+  );
 
   private preloadCache = new Set<string>();
-
-  private preloadAdjacent(): void {
-    const p = this.currentPage();
-    this.preload(p - 1);
-    this.preload(p + 1);
-  }
-
-  private preload(index: number): void {
-    if (index < 0 || index >= this.totalPages) return;
-    const url = this.pages[index];
-    if (this.preloadCache.has(url)) return;
-    this.preloadCache.add(url);
-    const img = new Image();
-    img.src = url;
-  }
-
   private keyboardSub!: Subscription;
 
+  constructor(private route: ActivatedRoute) {}
+
   ngOnInit(): void {
+    const chapterParam = this.route.snapshot.queryParamMap.get('chapter');
+    const chapterIndex = chapterParam !== null ? parseInt(chapterParam, 10) : 0;
+    this.currentChapter.set(
+      chapterIndex >= 0 && chapterIndex < this.chapters.length ? chapterIndex : 0
+    );
+    this.currentPage.set(0);
+    this.preloadAdjacent();
+
     this.keyboardSub = fromEvent<KeyboardEvent>(document, 'keydown')
       .subscribe(e => this.onKeydown(e));
-    this.preloadAdjacent();
   }
 
   ngOnDestroy(): void {
@@ -69,7 +66,7 @@ export class ReaderComponent implements OnInit, OnDestroy {
   }
 
   goNext(): void {
-    if (this.currentPage() < this.totalPages - 1) {
+    if (this.currentPage() < this.totalPages() - 1) {
       this.currentPage.update(p => p + 1);
       this.scrollToTop();
       this.preloadAdjacent();
@@ -77,7 +74,7 @@ export class ReaderComponent implements OnInit, OnDestroy {
   }
 
   goLast(): void {
-    this.currentPage.set(this.totalPages - 1);
+    this.currentPage.set(this.totalPages() - 1);
     this.scrollToTop();
     this.preloadAdjacent();
   }
@@ -94,6 +91,20 @@ export class ReaderComponent implements OnInit, OnDestroy {
     } else if (x > (width / 3) * 2) {
       this.goNext();
     }
+  }
+
+  private preloadAdjacent(): void {
+    const p = this.currentPage();
+    this.preload(p - 1);
+    this.preload(p + 1);
+  }
+
+  private preload(pageIndex: number): void {
+    if (pageIndex < 0 || pageIndex >= this.totalPages()) return;
+    const url = `pages/${this.currentChapter() + 1}-${pageIndex + 1}.png`;
+    if (this.preloadCache.has(url)) return;
+    this.preloadCache.add(url);
+    fetch(url).catch(() => {});
   }
 
   private onKeydown(e: KeyboardEvent): void {
@@ -114,5 +125,4 @@ export class ReaderComponent implements OnInit, OnDestroy {
         break;
     }
   }
-
 }

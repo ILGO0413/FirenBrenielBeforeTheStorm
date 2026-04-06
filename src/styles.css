@@ -59,3 +59,11 @@ main {
   color: var(--button-hover-text);
   transform: translateY(-1px);
 }
+
+.cta-btn:disabled {
+  background: var(--button-disabled);
+  color: var(--button-disabled-text);
+  cursor: default;
+  pointer-events: none;
+  transform: none;
+}
