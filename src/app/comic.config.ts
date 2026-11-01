@@ -6,7 +6,7 @@ export interface ChapterConfig {
 export const COMIC_CONFIG = {
   chapters: [
     { title: 'ГЛАВА 1: Заражение', pages: 21 },
-    { title: 'ГЛАВА 2: Дом', pages: 0 },
-    { title: 'ГЛАВА 3: Корни', pages: 0 },
+    { title: 'ГЛАВА 2', pages: 0 },
+    { title: 'ГЛАВА 3', pages: 0 },
   ] as ChapterConfig[],
 };
